@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda - Pinku Galeria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              sans: ['"Montserrat"', "sans-serif"],
+            },
+            colors: {
+              "pinku-main": "#f43f5e",
+              "pinku-light": "#fff1f2",
+              "pinku-dark": "#be123c",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-stone-50 font-sans text-stone-700 flex flex-col min-h-screen">
+    <nav
+      class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <a href="home.html" class="flex items-center gap-2 group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-pinku-main group-hover:rotate-12 transition transform duration-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            <span
+              class="font-serif text-3xl font-bold text-stone-800 tracking-tight"
+              >Pinku <span class="text-pinku-main italic">Galeria</span></span
+            >
+          </a>
+
+          <div class="hidden md:flex space-x-10">
+            <a
+              href="home.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >BERANDA</a
+            >
+            <a
+              href="katalog.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >KATALOG</a
+            >
+            <a
+              href="tentang.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >TENTANG</a
+            >
+            <a
+              href="kontak.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >KONTAK</a
+            >
+          </div>
+
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden text-stone-600 focus:outline-none p-2"
+          >
+            <svg
+              class="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-white border-t border-stone-100 shadow-lg absolute w-full left-0 z-40"
+      >
+        <a
+          href="home.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 border-b border-stone-50 hover:bg-pinku-light hover:text-pinku-main"
+          >BERANDA</a
+        >
+        <a
+          href="katalog.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 border-b border-stone-50 hover:bg-pinku-light hover:text-pinku-main"
+          >KATALOG</a
+        >
+        <a
+          href="tentang.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 border-b border-stone-50 hover:bg-pinku-light hover:text-pinku-main"
+          >TENTANG</a
+        >
+        <a
+          href="kontak.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 hover:bg-pinku-light hover:text-pinku-main"
+          >KONTAK</a
+        >
+      </div>
+    </nav>
+
+    <header
+      class="bg-pinku-light py-24 md:py-32 text-center px-4 relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"
+      ></div>
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <h1
+          class="text-5xl md:text-7xl font-serif font-semibold text-stone-900 mb-6 leading-tight"
+        >
+          Cantik Selamanya, <br /><span class="text-pinku-main italic"
+            >Tanpa Layu</span
+          >
+        </h1>
+        <p
+          class="text-lg md:text-xl text-stone-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          Pinku Galeria menghadirkan rangkaian bunga artifisial premium.
+          Keindahan abadi yang dirancang untuk mengabadikan momen spesial Anda
+          selamanya.
+        </p>
+        <a
+          href="katalog.html"
+          class="bg-stone-900 text-white px-10 py-4 rounded-none font-medium text-sm tracking-widest hover:bg-pinku-main transition duration-300 shadow-xl inline-block"
+        >
+          LIHAT KOLEKSI
+        </a>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 py-24">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-serif font-bold text-stone-800 italic">
+          Kenapa Pinku?
+        </h2>
+        <div class="w-24 h-1 bg-pinku-main mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-12 text-center">
+        <div
+          class="p-8 bg-white border border-stone-100 hover:shadow-2xl transition duration-500 group"
+        >
+          <div class="text-5xl mb-6 group-hover:scale-110 transition transform">
+            ♾️
+          </div>
+          <h3 class="text-2xl font-serif font-bold mb-3 text-stone-800">
+            Keindahan Abadi
+          </h3>
+          <p class="text-stone-500 font-light leading-relaxed">
+            Terbuat dari bahan premium yang tahan lama. Tidak akan layu, tetap
+            cantik sepanjang masa.
+          </p>
+        </div>
+        <div
+          class="p-8 bg-white border border-stone-100 hover:shadow-2xl transition duration-500 group"
+        >
+          <div class="text-5xl mb-6 group-hover:scale-110 transition transform">
+            ✨
+          </div>
+          <h3 class="text-2xl font-serif font-bold mb-3 text-stone-800">
+            Real Touch
+          </h3>
+          <p class="text-stone-500 font-light leading-relaxed">
+            Tekstur dan visual yang sangat realistis, sulit dibedakan dengan
+            bunga asli.
+          </p>
+        </div>
+        <div
+          class="p-8 bg-white border border-stone-100 hover:shadow-2xl transition duration-500 group"
+        >
+          <div class="text-5xl mb-6 group-hover:scale-110 transition transform">
+            🎨
+          </div>
+          <h3 class="text-2xl font-serif font-bold mb-3 text-stone-800">
+            Artisan Design
+          </h3>
+          <p class="text-stone-500 font-light leading-relaxed">
+            Dirangkai secara handmade dengan sentuhan seni untuk estetika
+            ruangan Anda.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="bg-stone-900 text-stone-400 py-12 mt-auto border-t border-stone-800"
+    >
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-sm tracking-wider">
+          &copy; 2026 Pinku Galeria Florist. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupMobileMenu, initProtection } from "./script.js";
+      setupMobileMenu();
+      initProtection();
+    </script>
+  </body>
+</html>

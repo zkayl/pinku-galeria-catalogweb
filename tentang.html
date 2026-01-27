@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - Pinku Galeria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              sans: ['"Montserrat"', "sans-serif"],
+            },
+            colors: {
+              "pinku-main": "#f43f5e",
+              "pinku-light": "#fff1f2",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-stone-50 font-sans text-stone-700 flex flex-col min-h-screen">
+    <nav
+      class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <a href="home.html" class="flex items-center gap-2">
+            <span
+              class="font-serif text-3xl font-bold text-stone-800 tracking-tight"
+              >Pinku <span class="text-pinku-main italic">Galeria</span></span
+            >
+          </a>
+
+          <div class="hidden md:flex space-x-10">
+            <a
+              href="home.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >BERANDA</a
+            >
+            <a
+              href="katalog.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >KATALOG</a
+            >
+            <a
+              href="tentang.html"
+              class="text-pinku-main font-bold py-2 text-sm tracking-wide border-b-2 border-pinku-main"
+              >TENTANG</a
+            >
+            <a
+              href="kontak.html"
+              class="nav-link text-stone-600 hover:text-pinku-main py-2 text-sm font-medium tracking-wide"
+              >KONTAK</a
+            >
+          </div>
+
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden text-stone-600 focus:outline-none p-2"
+          >
+            <svg
+              class="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-white border-t border-stone-100 shadow-lg absolute w-full left-0 z-40"
+      >
+        <a
+          href="home.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 border-b border-stone-50 hover:bg-pinku-light hover:text-pinku-main"
+          >BERANDA</a
+        >
+        <a
+          href="katalog.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 border-b border-stone-50 hover:bg-pinku-light hover:text-pinku-main"
+          >KATALOG</a
+        >
+        <a
+          href="tentang.html"
+          class="block py-4 px-6 text-sm font-bold text-pinku-main bg-pinku-light border-b border-stone-50"
+          >TENTANG</a
+        >
+        <a
+          href="kontak.html"
+          class="block py-4 px-6 text-sm font-medium text-stone-600 hover:bg-pinku-light hover:text-pinku-main"
+          >KONTAK</a
+        >
+      </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-20 text-center">
+      <h2 class="text-5xl font-serif font-bold mb-10 text-stone-900 italic">
+        Kisah Pinku Galeria
+      </h2>
+
+      <div
+        class="space-y-6 text-lg font-light leading-relaxed text-stone-600 text-justify px-4 md:px-12"
+      >
+        <p>
+          <span
+            class="text-5xl float-left mr-3 mt-[-10px] font-serif text-pinku-main"
+            >D</span
+          >i Pinku Galeria, kami percaya bahwa kenangan indah seharusnya tidak
+          pernah layu. Itulah sebabnya kami mendedikasikan diri untuk
+          menghadirkan rangkaian <strong>Bunga Artifisial Premium</strong> yang
+          menggabungkan estetika sempurna dengan ketahanan abadi.
+        </p>
+        <p>
+          Kami memahami bahwa bunga segar memiliki keterbatasan waktu. Oleh
+          karena itu, kami menyeleksi bahan imitasi kualitas terbaik dengan
+          detail <em>"Real Touch"</em> yang menyerupai aslinya. Setiap helai
+          kelopak dan tangkai dipilih dengan teliti untuk memastikan buket Anda
+          tetap cantik bertahun-tahun lamanya.
+        </p>
+        <p>
+          Baik untuk dekorasi rumah, hadiah ulang tahun, atau kenang-kenangan
+          spesial, Pinku Galeria menawarkan solusi elegan yang praktis, bebas
+          perawatan, dan tentu saja—abadi. Kami tidak sekadar merangkai bunga;
+          kami merangkai kenangan yang bertahan selamanya.
+        </p>
+      </div>
+
+      <div class="mt-16 border-t border-stone-200 pt-10">
+        <p class="font-serif text-2xl italic text-stone-800">
+          "Timeless beauty in every petal."
+        </p>
+      </div>
+    </div>
+
+    <footer
+      class="bg-stone-900 text-stone-400 py-12 mt-auto text-center border-t border-stone-800"
+    >
+      <div class="max-w-7xl mx-auto px-4">
+        <h3 class="font-serif text-2xl text-white mb-4">Pinku Galeria</h3>
+        <p class="text-sm tracking-wider">&copy; 2026 Pinku Galeria Florist.</p>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupMobileMenu, initProtection } from "./script.js";
+      setupMobileMenu();
+      initProtection();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Pinku Galeria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              sans: ['"Montserrat"', "sans-serif"],
+            },
+            colors: { "pinku-main": "#f43f5e", "pinku-light": "#fff1f2" },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-stone-100 font-sans text-stone-700 flex flex-col min-h-screen"
+  >
+    <nav class="bg-stone-900 text-white shadow-lg sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a href="home.html" class="flex items-center gap-2">
+            <span class="font-serif text-xl font-bold tracking-wide"
+              >Pinku <span class="text-pinku-main italic">Admin</span></span
+            >
+          </a>
+
+          <div class="hidden md:flex">
+            <a
+              href="home.html"
+              class="text-stone-400 hover:text-white text-xs tracking-widest uppercase transition"
+              >Lihat Website</a
+            >
+          </div>
+
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden text-stone-400 focus:outline-none p-2"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-stone-800 border-t border-stone-700 absolute w-full left-0 z-40"
+      >
+        <a
+          href="home.html"
+          class="block py-3 px-6 text-xs font-bold uppercase tracking-widest text-stone-400 hover:text-white hover:bg-stone-700"
+          >Kembali ke Website</a
+        >
+      </div>
+    </nav>
+
+    <div
+      id="loginSection"
+      class="flex-grow flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white p-10 shadow-2xl w-full max-w-md border-t-4 border-pinku-main"
+      >
+        <h2
+          class="text-3xl font-serif font-bold text-center mb-8 text-stone-900"
+        >
+          Akses Admin
+        </h2>
+        <div class="mb-6">
+          <label
+            class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="adminPass"
+            class="w-full bg-stone-50 border p-4 focus:outline-none focus:border-pinku-main transition"
+            placeholder="••••••••"
+          />
+        </div>
+        <button
+          id="btnLogin"
+          class="w-full bg-stone-900 text-white font-bold text-sm tracking-widest py-4 hover:bg-pinku-main transition duration-300"
+        >
+          MASUK DASHBOARD
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="dashboardSection"
+      class="hidden max-w-7xl mx-auto px-4 py-12 w-full flex-grow"
+    >
+      <div
+        class="flex justify-between items-center mb-10 border-b border-stone-200 pb-4"
+      >
+        <h2 class="text-3xl font-serif font-bold text-stone-900 italic">
+          Manajemen Koleksi
+        </h2>
+        <button
+          id="btnLogout"
+          class="text-pinku-main hover:text-red-700 text-xs font-bold uppercase tracking-widest"
+        >
+          Logout
+        </button>
+      </div>
+
+      <div
+        class="bg-white p-8 shadow-xl border border-stone-100 mb-12 relative"
+      >
+        <div
+          id="loadingOverlay"
+          class="hidden absolute inset-0 bg-white/90 flex items-center justify-center z-10 backdrop-blur-sm"
+        >
+          <div
+            class="text-pinku-main font-bold animate-pulse text-sm tracking-widest uppercase"
+          >
+            Sedang Mengupload...
+          </div>
+        </div>
+
+        <h3
+          class="font-bold text-sm uppercase tracking-widest mb-6 text-stone-400"
+        >
+          Tambah Produk Baru
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <input
+            type="text"
+            id="newName"
+            placeholder="Nama Produk"
+            class="bg-stone-50 border p-3 focus:outline-none focus:border-pinku-main transition"
+          />
+          <input
+            type="number"
+            id="newPrice"
+            placeholder="Harga (Rp)"
+            class="bg-stone-50 border p-3 focus:outline-none focus:border-pinku-main transition"
+          />
+          <div>
+            <input
+              type="file"
+              id="newImageFile"
+              accept="image/*"
+              class="w-full text-xs text-stone-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-bold file:bg-stone-100 file:text-stone-700 hover:file:bg-pinku-main hover:file:text-white transition"
+            />
+          </div>
+
+          <textarea
+            id="newDesc"
+            rows="5"
+            placeholder="Deskripsi Lengkap (Tekan Enter untuk baris baru)"
+            class="bg-stone-50 border p-3 md:col-span-2 focus:outline-none focus:border-pinku-main transition resize-none"
+          ></textarea>
+        </div>
+        <button
+          id="btnSave"
+          class="mt-8 bg-stone-900 text-white px-8 py-3 text-sm font-bold tracking-widest hover:bg-pinku-main transition duration-300 w-full md:w-auto"
+        >
+          SIMPAN PRODUK
+        </button>
+      </div>
+
+      <div class="bg-white shadow-xl border border-stone-100">
+        <div
+          class="hidden md:grid md:grid-cols-[100px_1fr_150px_100px] bg-stone-100 text-stone-500 text-xs uppercase tracking-widest border-b"
+        >
+          <div class="p-5 font-medium">Foto</div>
+          <div class="p-5 font-medium">Detail Produk</div>
+          <div class="p-5 font-medium">Harga</div>
+          <div class="p-5 text-right font-medium">Kontrol</div>
+        </div>
+
+        <div id="adminProductList">
+          <div class="p-8 text-center text-stone-400 italic">
+            Memuat data...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast">Notifikasi</div>
+    <footer
+      class="bg-stone-900 text-stone-400 py-8 mt-auto text-center border-t border-stone-800"
+    >
+      <p class="text-xs tracking-widest">&copy; 2026 Pinku Galeria Admin.</p>
+    </footer>
+
+    <script type="module">
+      import {
+        addProductToDB,
+        deleteProductFromDB,
+        subscribeToProducts,
+        formatRupiah,
+        showToast,
+        compressImage,
+        setupMobileMenu,
+        initProtection,
+      } from "./script.js";
+      setupMobileMenu();
+      initProtection();
+
+      const btnLogin = document.getElementById("btnLogin");
+      const btnLogout = document.getElementById("btnLogout");
+      const adminPassInput = document.getElementById("adminPass");
+
+      function doLogin() {
+        const pass = adminPassInput.value;
+        if (pass === "admin123") {
+          document.getElementById("loginSection").classList.add("hidden");
+          document
+            .getElementById("dashboardSection")
+            .classList.remove("hidden");
+          showToast("Selamat Datang, Admin!");
+          subscribeToProducts(renderList);
+        } else {
+          alert("Password Salah!");
+        }
+      }
+
+      btnLogin.addEventListener("click", doLogin);
+      adminPassInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          doLogin();
+        }
+      });
+
+      btnLogout.addEventListener("click", () => {
+        location.reload();
+      });
+      window.deleteProductWrapper = (id) => {
+        deleteProductFromDB(id);
+      };
+
+      function renderList(products) {
+        const container = document.getElementById("adminProductList");
+        container.innerHTML = "";
+
+        if (products.length === 0) {
+          container.innerHTML =
+            '<div class="p-8 text-center text-stone-400 italic">Belum ada produk di database.</div>';
+          return;
+        }
+
+        products.forEach((p) => {
+          container.innerHTML += `
+                    <div class="border-b border-stone-50 hover:bg-stone-50 transition p-4 md:p-0">
+                        <div class="flex md:grid md:grid-cols-[100px_1fr_150px_100px] items-center">
+                            <div class="flex-shrink-0 md:p-5">
+                                <img src="${p.image}" class="w-20 h-20 md:w-16 md:h-16 object-cover rounded shadow-sm">
+                            </div>
+                            <div class="flex-grow ml-4 md:ml-0 md:p-5">
+                                <div class="font-serif font-bold text-lg text-stone-800">${p.name}</div>
+                                <div class="text-xs text-stone-500 mt-1 line-clamp-2 md:hidden">${p.description}</div>
+                                <div class="flex justify-between items-center mt-2 md:hidden">
+                                    <div class="text-sm font-medium text-stone-600">${formatRupiah(p.price)}</div>
+                                    <button onclick="window.deleteProductWrapper('${p.id}')" class="text-stone-400 hover:text-red-500 text-xs font-bold uppercase tracking-widest">Hapus</button>
+                                </div>
+                            </div>
+                            <div class="hidden md:block md:p-5 text-sm font-medium text-stone-600">
+                                ${formatRupiah(p.price)}
+                            </div>
+                            <div class="hidden md:block md:p-5 text-right">
+                                <button onclick="window.deleteProductWrapper('${p.id}')" class="text-stone-400 hover:text-red-500 text-xs font-bold uppercase tracking-widest transition">Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+        });
+      }
+
+      document.getElementById("btnSave").addEventListener("click", () => {
+        const name = document.getElementById("newName").value;
+        const price = document.getElementById("newPrice").value;
+        const desc = document.getElementById("newDesc").value;
+        const fileInput = document.getElementById("newImageFile");
+
+        if (!name || !price || !fileInput.files[0]) {
+          alert("Mohon lengkapi semua data!");
+          return;
+        }
+        document.getElementById("loadingOverlay").classList.remove("hidden");
+        compressImage(fileInput.files[0], async (base64Image) => {
+          const result = await addProductToDB({
+            name,
+            price: parseInt(price),
+            description: desc,
+            image: base64Image,
+          });
+          document.getElementById("loadingOverlay").classList.add("hidden");
+          if (result.success) {
+            showToast("Produk Berhasil Ditambahkan!");
+            document.getElementById("newName").value = "";
+            document.getElementById("newPrice").value = "";
+            document.getElementById("newDesc").value = "";
+            document.getElementById("newImageFile").value = "";
+          } else {
+            alert("Gagal koneksi database.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
