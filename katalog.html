@@ -11,7 +11,7 @@
     />
     <meta
       name="keywords"
-      content="bunga artifisial, buket bunga, bunga palsu premium, pinku galeria, hadiah wisuda, dekorasi rumah"
+      content="buket malang, bouquet malang, florist malang, toko bunga malang, kado wisuda malang, buket bunga artifisial, bunga palsu premium, pinku galeria, buket murah malang"
     />
     <meta name="author" content="Pinku Galeria" />
 
@@ -285,10 +285,9 @@
           grid.innerHTML += `
                     <div class="bg-white border border-stone-100 hover:shadow-lg transition p-3 lg:p-0 flex flex-row lg:flex-col gap-4 lg:gap-0 items-center lg:items-start group h-full relative">
                         
-                        <!-- GAMBAR -->
+                        <!-- GAMBAR: Lazy Loading dihapus agar kompatibel semua HP -->
                         <div class="w-24 h-24 flex-shrink-0 lg:w-full lg:h-48 overflow-hidden relative bg-stone-100">
-                            <!-- Loading Lazy agar gambar tidak didownload sebelum muncul -->
-                            <img src="${p.image}" loading="lazy" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
                             
                             <!-- Overlay Desktop -->
                             <div class="hidden lg:flex absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-300 items-center justify-center">
@@ -304,7 +303,6 @@
                                     <p class="text-pinku-main font-bold text-sm mb-2">${formatRupiah(p.price)}</p>
                                 </div>
                                 
-                                <!-- TOMBOL SHARE & COPY (Desktop & Mobile) -->
                                 <div class="flex gap-2">
                                     <button onclick="window.shareToWAWrapper('${p.id}', '${p.name}')" class="text-stone-400 hover:text-green-500 transition" title="Share ke WhatsApp">
                                         <i class="fa-brands fa-whatsapp text-lg"></i>
