@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Katalog - Pinku Galeria</title>
+
+    <title>Katalog Bunga Artifisial Premium - Pinku Galeria</title>
+    <meta
+      name="description"
+      content="Katalog Pinku Galeria. Temukan buket bunga artifisial, bunga imitasi premium, dan hadiah wisuda/ulang tahun yang tahan lama dan estetik."
+    />
+    <meta
+      name="keywords"
+      content="bunga artifisial, buket bunga, bunga palsu premium, pinku galeria, hadiah wisuda, dekorasi rumah"
+    />
+    <meta name="author" content="Pinku Galeria" />
+
+    <meta property="og:title" content="Katalog Pinku Galeria - Bunga Abadi" />
+    <meta
+      property="og:description"
+      content="Koleksi bunga artifisial premium yang cantik selamanya tanpa layu."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1591946693356-d44445831557?auto=format&fit=crop&w=1000&q=80"
+    />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <script>
       tailwind.config = {
         theme: {
@@ -147,6 +175,8 @@
       ></div>
     </div>
 
+    <div id="toast">Notifikasi</div>
+
     <footer
       class="bg-stone-900 text-stone-400 py-12 mt-auto border-t border-stone-800"
     >
@@ -161,13 +191,21 @@
         formatRupiah,
         setupMobileMenu,
         initProtection,
+        shareToWA,
+        copyLink,
+        showToast,
       } from "./script.js";
 
       setupMobileMenu();
       initProtection();
 
+      window.shareToWAWrapper = (id, name) => shareToWA(id, name);
+      window.copyLinkWrapper = (id) => copyLink(id);
+      window.showToast = showToast;
+
       let allProducts = [];
-      let currentPage = 1;
+      const urlParams = new URLSearchParams(window.location.search);
+      let currentPage = parseInt(urlParams.get("page")) || 1;
       const itemsPerPage = 10;
 
       subscribeToProducts((products) => {
@@ -175,8 +213,6 @@
         document.getElementById("loadingText").classList.add("hidden");
         document.getElementById("productGrid").classList.remove("hidden");
         document.getElementById("paginationNav").classList.remove("hidden");
-
-        currentPage = 1;
         renderPage();
       });
 
@@ -190,6 +226,11 @@
       });
 
       function renderPage() {
+        const totalPages = Math.ceil(allProducts.length / itemsPerPage);
+        if (currentPage > totalPages && totalPages > 0)
+          currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
+
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const pageItems = allProducts.slice(startIndex, endIndex);
@@ -224,6 +265,8 @@
 
       window.changePage = (page) => {
         currentPage = page;
+        const newUrl = `${window.location.pathname}?page=${page}`;
+        window.history.pushState({ path: newUrl }, "", newUrl);
         renderPage();
         window.scrollTo({ top: 0, behavior: "smooth" });
       };
@@ -240,26 +283,39 @@
 
         items.forEach((p) => {
           grid.innerHTML += `
-                    <div class="bg-white border border-stone-100 hover:shadow-lg transition p-3 lg:p-0 flex flex-row lg:flex-col gap-4 lg:gap-0 items-center lg:items-start group h-full">
+                    <div class="bg-white border border-stone-100 hover:shadow-lg transition p-3 lg:p-0 flex flex-row lg:flex-col gap-4 lg:gap-0 items-center lg:items-start group h-full relative">
                         
                         <!-- GAMBAR -->
                         <div class="w-24 h-24 flex-shrink-0 lg:w-full lg:h-48 overflow-hidden relative bg-stone-100">
-                            <img src="${p.image}" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
-                            <!-- Overlay hanya di Desktop -->
+                            <!-- Loading Lazy agar gambar tidak didownload sebelum muncul -->
+                            <img src="${p.image}" loading="lazy" class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-110">
+                            
+                            <!-- Overlay Desktop -->
                             <div class="hidden lg:flex absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-300 items-center justify-center">
                                 <button onclick="window.openDetail('${p.id}')" class="bg-white text-xs font-bold px-4 py-2 uppercase tracking-widest hover:bg-pinku-main hover:text-white transition">Lihat Detail</button>
                             </div>
                         </div>
 
                         <!-- KONTEN -->
-                        <div class="flex-grow flex flex-col justify-between lg:p-4 lg:w-full">
-                            <div>
-                                <h3 class="font-serif font-bold text-lg text-stone-900 leading-tight mb-1 group-hover:text-pinku-main transition-colors">${p.name}</h3>
-                                <p class="text-pinku-main font-bold text-sm mb-2">${formatRupiah(p.price)}</p>
+                        <div class="flex-grow flex flex-col justify-between lg:p-4 lg:w-full w-full">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-serif font-bold text-lg text-stone-900 leading-tight mb-1 group-hover:text-pinku-main transition-colors line-clamp-1">${p.name}</h3>
+                                    <p class="text-pinku-main font-bold text-sm mb-2">${formatRupiah(p.price)}</p>
+                                </div>
+                                
+                                <!-- TOMBOL SHARE & COPY (Desktop & Mobile) -->
+                                <div class="flex gap-2">
+                                    <button onclick="window.shareToWAWrapper('${p.id}', '${p.name}')" class="text-stone-400 hover:text-green-500 transition" title="Share ke WhatsApp">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    </button>
+                                    <button onclick="window.copyLinkWrapper('${p.id}')" class="text-stone-400 hover:text-pinku-main transition" title="Salin Link">
+                                        <i class="fa-regular fa-copy text-lg"></i>
+                                    </button>
+                                </div>
                             </div>
                             
-                            <!-- Tombol Deskripsi Lengkap -->
-                            <button onclick="window.openDetail('${p.id}')" class="text-xs font-bold uppercase tracking-widest text-stone-400 border border-stone-200 py-2 px-3 hover:bg-stone-900 hover:text-white transition text-center w-full lg:mt-2">
+                            <button onclick="window.openDetail('${p.id}')" class="text-xs font-bold uppercase tracking-widest text-stone-400 border border-stone-200 py-2 px-3 hover:bg-stone-900 hover:text-white transition text-center w-full lg:mt-2 mt-auto">
                                 Deskripsi Lengkap
                             </button>
                         </div>
@@ -269,7 +325,7 @@
       }
 
       window.openDetail = (id) => {
-        window.location.href = `detail.html?id=${id}`;
+        window.location.href = `detail.html?id=${id}&page=${currentPage}`;
       };
     </script>
   </body>
